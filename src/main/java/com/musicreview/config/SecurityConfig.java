@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 @Configuration
-@EnableWebSecurity //включает веб секьюрити
+@EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailsService userDetailsService;
@@ -27,25 +27,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/").hasAnyRole("USER", "ADMIN") // имеют доступ юзеры и админы
-                .antMatchers("/admin").hasRole("ADMIN") // имеют доступ дмины
-                .antMatchers("/register").permitAll() // имеют доступ все
+                .antMatchers("/").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/register").permitAll()
                 .and()
-        .exceptionHandling().accessDeniedPage("/unauthorized") //сюда перекинет если лезет куда не нужно
+        .exceptionHandling().accessDeniedPage("/unauthorized")
                 .and()
-        .formLogin() //связываем с формой логина пароля
+        .formLogin()
                 .loginPage("/login")
-                .loginProcessingUrl("/j_spring_security_check") // экшн нашей функции логина и пароля
-                .failureUrl("/login?error") // куда перекинуть если ввели неправ логин и пароль
+                .loginProcessingUrl("/j_spring_security_check")
+                .failureUrl("/login?error")
                 .usernameParameter("j_login")
-                .passwordParameter("j_password") //название откуда берутся инпуты
+                .passwordParameter("j_password")
                 .permitAll() //пускать всех
                 .and()
         .logout()
                 .permitAll()
-                .logoutUrl("/logout") // перенаправляет на /logout" чтобы выйти
-                .logoutSuccessUrl("/login?logout") //сюда выкинет если вышли из учётки
-                .invalidateHttpSession(true); //прибить сессию по выходу
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .invalidateHttpSession(true);
     }
 
     private ShaPasswordEncoder getShaPasswordEncoder(){

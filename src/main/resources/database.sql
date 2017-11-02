@@ -21,7 +21,7 @@ CREATE TABLE role (
 CREATE TABLE artist (
   id               INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   artist_firstname VARCHAR(255) NOT NULL,
-  artist_second    VARCHAR(255) NOT NULL,
+  artist_secondname    VARCHAR(255) NOT NULL,
   artist_nickname  VARCHAR(255) NOT NULL
 )
   ENGINE = InnoDB;

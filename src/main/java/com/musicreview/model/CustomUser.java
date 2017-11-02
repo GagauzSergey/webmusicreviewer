@@ -8,14 +8,22 @@ public class CustomUser {
     @GeneratedValue
     private long id;
 
+    @Column(name = "login")
     private String login;
-    private String password; // уже должен быть в хешированном виде
+
+    @Column(name = "password")
+    private String password;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
+    @Column (name = "firstName")
     private String firstName;
+
+    @Column (name = "secondName")
     private String secondName;
+
+    @Column (name = "email")
     private String email;
 
     public CustomUser(String login, String password, UserRole role) {
@@ -23,6 +31,7 @@ public class CustomUser {
         this.password = password;
         this.role = role;
     }
+
     public CustomUser(String firstName, String secondName, String login, String password, UserRole role, String email) {
         this.firstName = firstName;
         this.secondName = secondName;
@@ -90,4 +99,17 @@ public class CustomUser {
     public void setEmail(String email) {
         this.email = email;
     }
-  }
+
+    @Override
+    public String toString() {
+        return "CustomUser{" +
+                "id=" + id +
+                ", login='" + login + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", firstName='" + firstName + '\'' +
+                ", secondName='" + secondName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+}
