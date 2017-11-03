@@ -3,6 +3,7 @@ package com.musicreview.config;
 import com.musicreview.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -24,6 +25,7 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
+@ComponentScan (basePackages = {"com.musicreview.model", "com.musicreview.config", "com.musicreview.config"})
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Value("${hibernate.dialect}")

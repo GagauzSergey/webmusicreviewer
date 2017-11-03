@@ -71,7 +71,7 @@ CREATE TABLE artist_recordlabel (
   label_id INT NOT NULL,
 
   FOREIGN KEY (artist_id) REFERENCES artist (id),
-  FOREIGN KEY (label_id) REFERENCES record_label (id),
+  FOREIGN KEY (label_id) REFERENCES recordlabel (id),
 
   UNIQUE (artist_id, label_id)
 )
@@ -94,7 +94,7 @@ CREATE TABLE label_musicrelease (
   recordlabel_id INT NOT NULL,
   musicrelease_id INT NOT NULL,
 
-  FOREIGN KEY (recordlabel_id) REFERENCES record_label (id),
+  FOREIGN KEY (recordlabel_id) REFERENCES recordlabel (id),
   FOREIGN KEY (musicrelease_id) REFERENCES music_release (id),
 
   UNIQUE (recordlabel_id, musicrelease_id)
@@ -116,9 +116,9 @@ INSERT INTO artist VALUE (2, 'Armin', 'van Buuren', 'Armin van Buuren');
 INSERT INTO artist VALUE (3, 'Sander', 'van Doorn', 'Sander van Doorn');
 
 -- Data Insert to table: Record_Label
-INSERT INTO record_label VALUE (1, 'Colharbour Recordings', 'USA');
-INSERT INTO record_label VALUE (2, 'Armada Recordings', 'Netherlands');
-INSERT INTO record_label VALUE (3, 'Doorn Records', 'Netherlands');
+INSERT INTO recordlabel VALUE (1, 'Colharbour Recordings', 'USA');
+INSERT INTO recordlabel VALUE (2, 'Armada Recordings', 'Netherlands');
+INSERT INTO recordlabel VALUE (3, 'Doorn Records', 'Netherlands');
 
 -- Data Insert to table: Music Release
 INSERT INTO music_release VALUE (1,'Makus Schulz - Coldharbour (Original mix)', '2017-10-29',  1);

@@ -1,8 +1,11 @@
 package com.musicreview.model;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 
 @Entity
+@Repository
 public class CustomUser {
     @Id
     @GeneratedValue

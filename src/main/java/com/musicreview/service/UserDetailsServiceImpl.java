@@ -15,25 +15,23 @@ import java.util.Set;
 
 @Service
 /*
-* UserDetailsService спринговый интерфейс
+* UserDetailsService
 * */
 public class UserDetailsServiceImpl implements UserDetailsService {
-    @Autowired //сюда инжектим наш сервис
+
+    @Autowired
     private UserService userService;
 
-    /*
-    * каждый раз когда вводится логин пароль и спринг секьюрити перехватывает его и
-    * */
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        CustomUser customUser = userService.getUserByLogin(login);// дай мне юзера по логину
+        CustomUser customUser = userService.getUserByLogin(login);
         if (customUser == null)
-            //если нет такого юзера выведет ексепшин и вы ввели неправильн пароль
+
             throw new UsernameNotFoundException(login + " not found");
 
         Set<GrantedAuthority> roles = new HashSet<>();
         roles.add(new SimpleGrantedAuthority(customUser.getRole().toString()));
-     //если правильн то возвращаем
+
         return new User(customUser.getLogin(), customUser.getPassword(), roles);
     }
 }

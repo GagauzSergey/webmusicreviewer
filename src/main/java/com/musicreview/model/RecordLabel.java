@@ -1,19 +1,25 @@
 package com.musicreview.model;
 
+import org.springframework.stereotype.Repository;
+
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author Gagauz Segey
+ * Created by user on 03.11.2017.
+ */
+
 @Entity
+@Repository
 public class RecordLabel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "label_name")
     private String label_name;
 
-    @Column (name = "artist_country")
     private String artist_country;
 
     @ManyToMany (mappedBy = "record_label")
@@ -65,3 +71,5 @@ public class RecordLabel {
                 '}';
     }
 }
+
+

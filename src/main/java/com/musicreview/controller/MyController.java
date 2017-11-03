@@ -1,6 +1,8 @@
 package com.musicreview.controller;
 
+import com.musicreview.model.Artist;
 import com.musicreview.model.UserRole;
+import com.musicreview.service.ArtistService;
 import com.musicreview.service.UserService;
 import com.musicreview.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +21,13 @@ public class MyController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ArtistService artistService;
+
     @RequestMapping("/")
     public String index(Model model) {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); //возвращает юзера под которому сейчас осущ запрос
-        String login = user.getUsername(); // и знать что за юзер отправляет этот запрос
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String login = user.getUsername();
 
         CustomUser dbUser = userService.getUserByLogin(login);
         model.addAttribute("firstName", dbUser.getFirstName());
@@ -39,7 +44,7 @@ public class MyController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String login = user.getUsername();
 
-        CustomUser dbUser = userService.getUserByLogin(login); // вынести в одну транзакцию на запись
+        CustomUser dbUser = userService.getUserByLogin(login);
         dbUser.setEmail(email);
 
         userService.updateUser(dbUser);
@@ -83,5 +88,22 @@ public class MyController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         model.addAttribute("login", user.getUsername());
         return "unauthorized";
+    }
+
+    @RequestMapping("/newartist")
+    public String artist(){return "newartist";}
+
+    @RequestMapping (value = "/newartist", method = RequestMethod.POST)
+    public String addArtist(@RequestParam String artist_firstname,
+                         @RequestParam String artist_secondname,
+                         @RequestParam String artist_nickname, Model model) {
+        if (artistService.existsByNickname(artist_nickname)) {
+            model.addAttribute("exists", true);
+            return "reject";
+        }
+
+        artistService.addArtist(new Artist(artist_firstname,artist_secondname, artist_nickname));
+
+        return "newartist";
     }
 }

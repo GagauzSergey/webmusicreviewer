@@ -1,13 +1,20 @@
+
 package com.musicreview.model;
+
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
- * @author Gagauz Sergey
+ * @author Gagauz Segey
+ * Created by user on 03.11.2017.
  */
+
 @Entity
+@Repository
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,10 +29,12 @@ public class Artist {
     @Column(name = "artist_nickname")
     private String artist_nickname;
 
+
     @ManyToMany
-    @JoinTable (name = "artist_recordlabel", joinColumns = @JoinColumn (name = "artist_id"),
-    inverseJoinColumns = @JoinColumn (name = "label_id"))
+    @JoinTable(name = "artist_recordlabel", joinColumns = @JoinColumn(name = "artist_id"),
+            inverseJoinColumns = @JoinColumn(name = "label_id"))
     private Set<RecordLabel> recordLabels = new HashSet<>();
+
 
     public Artist(String artist_firstname, String artist_secondname, String artist_nickname) {
         this.artist_firstname = artist_firstname;
@@ -91,3 +100,4 @@ public class Artist {
                 '}';
     }
 }
+
