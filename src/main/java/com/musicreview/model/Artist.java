@@ -30,10 +30,10 @@ public class Artist {
     private String artist_nickname;
 
 
-    @ManyToMany
+/*    @ManyToMany
     @JoinTable(name = "artist_recordlabel", joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
-    private Set<RecordLabel> recordLabels = new HashSet<>();
+    private Set<RecordLabel> recordLabels = new HashSet<>();*/
 
 
     public Artist(String artist_firstname, String artist_secondname, String artist_nickname) {
@@ -81,7 +81,7 @@ public class Artist {
         this.artist_nickname = artist_nickname;
     }
 
-    public Set<RecordLabel> getRecordLabels() {
+/*    public Set<RecordLabel> getRecordLabels() {
         return recordLabels;
     }
 
@@ -98,6 +98,6 @@ public class Artist {
                 ", artist_nickname='" + artist_nickname + '\'' +
                 ", recordLabels=" + recordLabels +
                 '}';
-    }
+    }*/
 }
 

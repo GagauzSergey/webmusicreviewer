@@ -1,8 +1,10 @@
 package com.musicreview.controller;
 
 import com.musicreview.model.Artist;
+import com.musicreview.model.RecordLabel;
 import com.musicreview.model.UserRole;
 import com.musicreview.service.ArtistService;
+import com.musicreview.service.RecordLabelService;
 import com.musicreview.service.UserService;
 import com.musicreview.model.CustomUser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,6 +26,9 @@ public class MyController {
 
     @Autowired
     private ArtistService artistService;
+
+    @Autowired
+    private RecordLabelService recordLabelService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -104,6 +110,39 @@ public class MyController {
 
         artistService.addArtist(new Artist(artist_firstname,artist_secondname, artist_nickname));
 
-        return "newartist";
+        return "redirect:/artist_list";
+    }
+
+    @RequestMapping("/remove/{id}")
+    public String removeBook(@PathVariable("id") Long id){
+
+        artistService.deleteArtist(id);
+
+        return "redirect:/artist_list";
+    }
+
+    @RequestMapping(value = "artist_list", method = RequestMethod.GET)
+    public String listArtist(Model model){
+        model.addAttribute("artist", new Artist());
+        model.addAttribute("artistList", artistService.artistList());
+        return "artist_list";
+    }
+
+
+
+    @RequestMapping("/newlabel")
+    public String recordLabel(){return "newlabel";}
+
+    @RequestMapping (value = "/newlabel", method = RequestMethod.POST)
+    public String addRecordLabel(@RequestParam String label_name,
+                            @RequestParam String label_country, Model model) {
+        if (recordLabelService.existsRecordLabelByName(label_name)) {
+            model.addAttribute("exists", true);
+            return "reject";
+        }
+
+        recordLabelService.addRecordLabel(new RecordLabel(label_name, label_country));
+
+        return "redirect:/newlabel";
     }
 }

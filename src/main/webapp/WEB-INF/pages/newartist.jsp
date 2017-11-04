@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>webmusicreviewer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <div align="center">
@@ -19,5 +21,8 @@
         </c:if>
     </form>
 </div>
+
+<a href="artist_list">Artist List</a>
+
 </body>
 </html>

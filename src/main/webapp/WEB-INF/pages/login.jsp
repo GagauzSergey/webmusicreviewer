@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>webmusicreviewer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div align="center">
@@ -11,7 +13,8 @@
         <form action="${loginUrl}" method="POST">
             Login:<br/><input type="text" name="j_login"><br/>
             Password:<br/><input type="password" name="j_password"><br/>
-            <input type="submit" />
+
+            <input type="submit" name="Submit"/>
 
             <p><a href="/register">Register new user</a></p>
 
@@ -24,5 +27,8 @@
             </c:if>
         </form>
     </div>
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
 </body>
 </html>

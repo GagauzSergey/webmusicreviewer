@@ -6,14 +6,17 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+
 /**
  * @author Gagauz Segey
  * Created by user on 03.11.2017.
  */
 
+
 @Entity
 @Repository
 public class RecordLabel {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -22,8 +25,8 @@ public class RecordLabel {
 
     private String artist_country;
 
-    @ManyToMany (mappedBy = "record_label")
-    private Set <Artist> artists = new HashSet<>();
+/*    @ManyToMany (mappedBy = "record_label")
+    private Set <Artist> artists = new HashSet<>();*/
 
     public RecordLabel(String label_name, String artist_country) {
         this.label_name = label_name;
@@ -61,7 +64,7 @@ public class RecordLabel {
         this.artist_country = artist_country;
     }
 
-    @Override
+/*    @Override
     public String toString() {
         return "RecordLabel{" +
                 "id=" + id +
@@ -69,7 +72,7 @@ public class RecordLabel {
                 ", artist_country='" + artist_country + '\'' +
                 ", artists=" + artists +
                 '}';
-    }
+    }*/
 }
 
 

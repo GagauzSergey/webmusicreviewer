@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * @author Gagauz Sergey
  * Created by user on 03.11.2017.
@@ -39,5 +41,18 @@ public class ArtistServiceImpl implements ArtistService {
     @Transactional
     public void updateArtist(Artist artist) {
         artistRepository.save(artist);
+    }
+
+    @Override
+    @Transactional
+    public void deleteArtist(Long id) {
+ //       artistRepository.delete(getArtistByNickname(nickname));
+        artistRepository.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public List <Artist> artistList() {
+        return artistRepository.findAll();
     }
 }

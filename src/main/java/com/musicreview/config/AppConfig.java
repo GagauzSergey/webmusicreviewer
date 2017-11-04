@@ -25,7 +25,8 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:config.properties")
 @EnableTransactionManagement
-@ComponentScan (basePackages = {"com.musicreview.model", "com.musicreview.config", "com.musicreview.config"})
+@ComponentScan (basePackages = {"com.musicreview.model",
+        "com.musicreview.config", "com.musicreview.service", "com.musicreview.dao"})
 @EnableWebMvc
 public class AppConfig extends WebMvcConfigurerAdapter {
     @Value("${hibernate.dialect}")

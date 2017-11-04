@@ -12,8 +12,8 @@ import org.springframework.data.repository.query.Param;
 public interface ArtistRepository extends JpaRepository <Artist, Long>{
 
     @Query("SELECT u FROM Artist u where u.artist_nickname = :artist_nickname")
-    Artist findByNickname(@Param("artist_nickname") String login);
+    Artist findByNickname(@Param("artist_nickname") String artist_nickname);
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM Artist u WHERE u.artist_nickname = :artist_nickname")
-    boolean existsByNickname(@Param("artist_nickname") String login);
+    boolean existsByNickname(@Param("artist_nickname") String artist_nickname);
 }

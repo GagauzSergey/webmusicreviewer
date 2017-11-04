@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>webmusicreviewer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
     <div align="center">
@@ -21,5 +23,8 @@
         <c:url value="/logout" var="logoutUrl" />
         <p>Click to logout: <a href="${logoutUrl}">LOGOUT</a></p>
     </div>
+    <script>
+        $('.selectpicker').selectpicker();
+    </script>
 </body>
 </html>

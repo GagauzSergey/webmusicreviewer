@@ -1,6 +1,7 @@
 package com.musicreview.service;
 
-import com.musicreview.model.Artist;;
+import com.musicreview.model.Artist;
+import java.util.List;
 
 /**
  * @author Gagauz Sergey
@@ -11,4 +12,6 @@ public interface ArtistService {
     boolean existsByNickname(String nickname);
     void addArtist(Artist artist);
     void updateArtist(Artist artist);
+    void deleteArtist (Long id);
+    List <Artist> artistList();
 }
