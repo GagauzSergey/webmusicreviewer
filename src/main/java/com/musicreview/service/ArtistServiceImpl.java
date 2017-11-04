@@ -1,12 +1,16 @@
 package com.musicreview.service;
 
 import com.musicreview.dao.ArtistRepository;
+import com.musicreview.dao.RecordLabelRepository;
 import com.musicreview.model.Artist;
+import com.musicreview.model.RecordLabel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author Gagauz Sergey
@@ -18,6 +22,9 @@ public class ArtistServiceImpl implements ArtistService {
 
     @Autowired
     private ArtistRepository artistRepository;
+
+    @Autowired
+    private RecordLabelRepository recordLabelRepository;
 
     @Override
     @Transactional(readOnly = true)
@@ -34,6 +41,9 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public void addArtist(Artist artist) {
+        Set <RecordLabel> recordLabels = new HashSet<>();
+        recordLabels.add(recordLabelRepository.getOne(1L));
+        artist.setRecordLabels(recordLabels);
         artistRepository.save(artist);
     }
 

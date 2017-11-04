@@ -1,9 +1,16 @@
 package com.musicreview.service;
 
+import com.musicreview.dao.ArtistRepository;
+import com.musicreview.dao.RecordLabelRepository;
+import com.musicreview.model.Artist;
 import com.musicreview.model.RecordLabel;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by user on 04.11.2017.
@@ -11,6 +18,12 @@ import java.util.List;
 
 @Service
 public class RecordLabelServiceImpl implements RecordLabelService{
+
+    @Autowired
+    private RecordLabelRepository recordLabelRepository;
+
+    @Autowired
+    private ArtistRepository artistRepository;
 
     @Override
     public RecordLabel getRecordLabelByName(String label_name) {
@@ -23,8 +36,12 @@ public class RecordLabelServiceImpl implements RecordLabelService{
     }
 
     @Override
+    @Transactional
     public void addRecordLabel(RecordLabel recordLabel) {
-
+        Set<Artist> artistSet = new HashSet<>();
+        artistSet.add(artistRepository.getOne(1L));
+        recordLabel.setArtistsList(artistSet);
+        recordLabelRepository.save(recordLabel);
     }
 
     @Override

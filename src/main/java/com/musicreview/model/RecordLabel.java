@@ -9,7 +9,7 @@ import java.util.Set;
 
 /**
  * @author Gagauz Segey
- * Created by user on 03.11.2017.
+ *         Created by user on 03.11.2017.
  */
 
 
@@ -21,16 +21,18 @@ public class RecordLabel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @Column (name = "label_name")
     private String label_name;
 
-    private String artist_country;
+    @Column (name = "label_country")
+    private String label_country;
 
-/*    @ManyToMany (mappedBy = "record_label")
-    private Set <Artist> artists = new HashSet<>();*/
+    @ManyToMany (fetch = FetchType.LAZY, mappedBy = "recordLabels")
+    private Set <Artist> artistsList;
 
-    public RecordLabel(String label_name, String artist_country) {
+    public RecordLabel(String label_name, String label_country) {
         this.label_name = label_name;
-        this.artist_country = artist_country;
+        this.label_country=label_country;
     }
 
     public RecordLabel(String label_name) {
@@ -56,23 +58,31 @@ public class RecordLabel {
         this.label_name = label_name;
     }
 
-    public String getArtist_country() {
-        return artist_country;
+    public String getLabel_country() {
+        return label_country;
     }
 
-    public void setArtist_country(String artist_country) {
-        this.artist_country = artist_country;
+    public void setLabel_country(String label_country) {
+        this.label_country = label_country;
     }
 
-/*    @Override
+    public Set<Artist> getArtistsList() {
+        return artistsList;
+    }
+
+    @Override
     public String toString() {
         return "RecordLabel{" +
                 "id=" + id +
                 ", label_name='" + label_name + '\'' +
-                ", artist_country='" + artist_country + '\'' +
-                ", artists=" + artists +
+                ", label_country='" + label_country + '\'' +
+                ", artistsList=" + artistsList +
                 '}';
-    }*/
+    }
+
+    public void setArtistsList(Set<Artist> artistsList) {
+        this.artistsList = artistsList;
+    }
 }
 
 
