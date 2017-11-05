@@ -6,12 +6,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-
 /**
  * @author Gagauz Segey
  *         Created by user on 03.11.2017.
  */
-
 
 @Entity
 @Repository

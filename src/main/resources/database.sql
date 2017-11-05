@@ -39,7 +39,9 @@ CREATE TABLE music_release (
   id            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   release_title VARCHAR(255) NOT NULL,
   release_date  DATE         NOT NULL,
-  release_review INT NOT NULL
+  recordlabel_id INT NOT NULL,
+
+  FOREIGN KEY (recordlabel_id) REFERENCES record_label (id)
 )
   ENGINE = InnoDB;
 
@@ -49,7 +51,10 @@ CREATE TABLE review (
   review_name    VARCHAR(255) NOT NULL,
   review_text    VARCHAR(255) NOT NULL,
   review_rate    INT          NOT NULL,
-  review_time    DATE
+  review_time    DATE,
+  musicrelease_id INT NOT NULL,
+
+  FOREIGN KEY (musicrelease_id) REFERENCES music_release (id)
 )
   ENGINE = InnoDB;
 
