@@ -25,7 +25,10 @@ public class MusicRelease {
     private Date release_date;
 
     @OneToMany(mappedBy = "musicRelease", cascade = CascadeType.ALL)
-    private Set <Review> relese_review;
+    private Set < Review > relese_review;
+
+    @ManyToMany (fetch = FetchType.LAZY, mappedBy = "musicReleaseSet")
+    private Set <Artist> artists;
 
     public MusicRelease(String release_title, int record_label, Date release_date) {
         this.release_title = release_title;
@@ -77,6 +80,18 @@ public class MusicRelease {
 
     public Set<Review> getRelese_review() {
         return relese_review;
+    }
+
+    public void setRelese_review(Set<Review> relese_review) {
+        this.relese_review = relese_review;
+    }
+
+    public Set<Artist> getArtists() {
+        return artists;
+    }
+
+    public void setArtists(Set<Artist> artists) {
+        this.artists = artists;
     }
 
     @Override

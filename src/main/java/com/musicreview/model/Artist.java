@@ -35,6 +35,11 @@ public class Artist {
             inverseJoinColumns = @JoinColumn(name = "label_id"))
     private Set<RecordLabel> recordLabels;
 
+    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable (name = "artist_musicrelease", joinColumns = @JoinColumn (name = "artist_id"),
+    inverseJoinColumns = @JoinColumn (name = "musicrelease_id"))
+    private Set <MusicRelease> musicReleaseSet;
+
 
     public Artist(String artist_firstname, String artist_secondname, String artist_nickname) {
         this.artist_firstname = artist_firstname;
@@ -87,6 +92,14 @@ public class Artist {
 
     public void setRecordLabels(Set<RecordLabel> recordLabels) {
         this.recordLabels = recordLabels;
+    }
+
+    public Set<MusicRelease> getMusicReleaseSet() {
+        return musicReleaseSet;
+    }
+
+    public void setMusicReleaseSet(Set<MusicRelease> musicReleaseSet) {
+        this.musicReleaseSet = musicReleaseSet;
     }
 
     @Override
