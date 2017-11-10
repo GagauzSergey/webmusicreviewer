@@ -8,26 +8,29 @@ import java.util.Set;
 
 /**
  * @author Gagauz Sergey
- * Created by user on 05.11.2017.
+ *         Created by user on 05.11.2017.
  */
 
 @Entity
 @Repository
 public class MusicRelease {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
+    @Column(name = "release_title")
     private String release_title;
 
+    @Column (name = "record_label")
     private int record_label;
 
+    @Column (name = "release_date")
     private Date release_date;
 
     @OneToMany(mappedBy = "musicRelease", cascade = CascadeType.ALL)
-    private Set < Review > relese_review;
+    private Set<Review> relese_review;
 
-    @ManyToMany (fetch = FetchType.LAZY, mappedBy = "musicReleaseSet")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "musicReleaseSet")
     private Set <Artist> artists;
 
     public MusicRelease(String release_title, int record_label, Date release_date) {

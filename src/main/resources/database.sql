@@ -27,7 +27,7 @@ CREATE TABLE artist (
   ENGINE = InnoDB;
 
 -- Table: Label
-CREATE TABLE record_label (
+CREATE TABLE recordlabel (
   id               INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   label_name VARCHAR(255) NOT NULL,
   label_country VARCHAR(255)
@@ -35,13 +35,13 @@ CREATE TABLE record_label (
   ENGINE = InnoDB;
 
 -- Table: Music Release
-CREATE TABLE music_release (
+CREATE TABLE musicrelease (
   id            INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
   release_title VARCHAR(255) NOT NULL,
   release_date  DATE         NOT NULL,
   recordlabel_id INT NOT NULL,
 
-  FOREIGN KEY (recordlabel_id) REFERENCES record_label (id)
+  FOREIGN KEY (recordlabel_id) REFERENCES recordlabel (id)
 )
   ENGINE = InnoDB;
 
@@ -54,7 +54,7 @@ CREATE TABLE review (
   review_time    DATE,
   musicrelease_id INT NOT NULL,
 
-  FOREIGN KEY (musicrelease_id) REFERENCES music_release (id)
+  FOREIGN KEY (musicrelease_id) REFERENCES musicrelease (id)
 )
   ENGINE = InnoDB;
 
@@ -88,7 +88,7 @@ CREATE TABLE artist_musicrelease (
   musicrelease_id INT NOT NULL,
 
   FOREIGN KEY (artist_id) REFERENCES artist (id),
-  FOREIGN KEY (musicrelease_id) REFERENCES music_release (id),
+  FOREIGN KEY (musicrelease_id) REFERENCES musicrelease (id),
 
   UNIQUE (artist_id, musicrelease_id)
 )
@@ -100,7 +100,7 @@ CREATE TABLE label_musicrelease (
   musicrelease_id INT NOT NULL,
 
   FOREIGN KEY (recordlabel_id) REFERENCES recordlabel (id),
-  FOREIGN KEY (musicrelease_id) REFERENCES music_release (id),
+  FOREIGN KEY (musicrelease_id) REFERENCES musicrelease (id),
 
   UNIQUE (recordlabel_id, musicrelease_id)
 )
@@ -126,11 +126,11 @@ INSERT INTO recordlabel VALUE (2, 'Armada Recordings', 'Netherlands');
 INSERT INTO recordlabel VALUE (3, 'Doorn Records', 'Netherlands');
 
 -- Data Insert to table: Music Release
-INSERT INTO music_release VALUE (1,'Makus Schulz - Coldharbour (Original mix)', '2017-10-29',  1);
-INSERT INTO music_release VALUE (2,'Armin van Buuren - From the Dark (Original mix)','2017-10-29',2);
+INSERT INTO musicrelease VALUE (1,'Makus Schulz - Coldharbour (Original mix)', '2017-10-29',  1);
+INSERT INTO musicrelease VALUE (2,'Armin van Buuren - From the Dark (Original mix)','2017-10-29',2);
 
 -- Data Insert to table: Review
-INSERT INTO review VALUE (1, 'Review on Makus Schulz - Coldharbour', 'Good release!', 8, '2017-10-30');
+INSERT INTO review VALUE (1, 'Review on Makus Schulz - Coldharbour', 10, 'Good release!', 8, '2017-10-30');
 
 -- Data Insert to table: User_roles
 INSERT INTO user_roles VALUE (1, 1);

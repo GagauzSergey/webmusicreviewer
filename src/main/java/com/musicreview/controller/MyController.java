@@ -4,6 +4,7 @@ import com.musicreview.model.Artist;
 import com.musicreview.model.RecordLabel;
 import com.musicreview.model.UserRole;
 import com.musicreview.service.ArtistService;
+import com.musicreview.service.MusicReleaseService;
 import com.musicreview.service.RecordLabelService;
 import com.musicreview.service.UserService;
 import com.musicreview.model.CustomUser;
@@ -29,6 +30,9 @@ public class MyController {
 
     @Autowired
     private RecordLabelService recordLabelService;
+
+   @Autowired
+    private MusicReleaseService musicReleaseService;
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -145,4 +149,6 @@ public class MyController {
 
         return "redirect:/newlabel";
     }
+
+
 }
