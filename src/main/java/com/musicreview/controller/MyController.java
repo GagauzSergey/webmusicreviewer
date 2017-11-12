@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MyController {
 
+    static final int DEFAULT_RECORDLABEL_ID = -1;
+
     @Autowired
     private UserService userService;
 
@@ -31,7 +33,7 @@ public class MyController {
     @Autowired
     private RecordLabelService recordLabelService;
 
-   @Autowired
+    @Autowired
     private MusicReleaseService musicReleaseService;
 
     @RequestMapping("/")
@@ -101,24 +103,26 @@ public class MyController {
     }
 
     @RequestMapping("/newartist")
-    public String artist(){return "newartist";}
+    public String artist() {
+        return "newartist";
+    }
 
-    @RequestMapping (value = "/newartist", method = RequestMethod.POST)
+    @RequestMapping(value = "/newartist", method = RequestMethod.POST)
     public String addArtist(@RequestParam String artist_firstname,
-                         @RequestParam String artist_secondname,
-                         @RequestParam String artist_nickname, Model model) {
+                            @RequestParam String artist_secondname,
+                            @RequestParam String artist_nickname, Model model) {
         if (artistService.existsByNickname(artist_nickname)) {
             model.addAttribute("exists", true);
             return "reject";
         }
 
-        artistService.addArtist(new Artist(artist_firstname,artist_secondname, artist_nickname));
+        artistService.addArtist(new Artist(artist_firstname, artist_secondname, artist_nickname));
 
         return "redirect:/artist_list";
     }
 
     @RequestMapping("/remove/{id}")
-    public String removeBook(@PathVariable("id") Long id){
+    public String removeArtist(@PathVariable("id") Long id) {
 
         artistService.deleteArtist(id);
 
@@ -126,20 +130,21 @@ public class MyController {
     }
 
     @RequestMapping(value = "artist_list", method = RequestMethod.GET)
-    public String listArtist(Model model){
+    public String listArtist(Model model) {
         model.addAttribute("artist", new Artist());
         model.addAttribute("artistList", artistService.artistList());
         return "artist_list";
     }
 
 
-
     @RequestMapping("/newlabel")
-    public String recordLabel(){return "newlabel";}
+    public String recordLabel() {
+        return "newlabel";
+    }
 
-    @RequestMapping (value = "/newlabel", method = RequestMethod.POST)
+    @RequestMapping(value = "/newlabel", method = RequestMethod.POST)
     public String addRecordLabel(@RequestParam String label_name,
-                            @RequestParam String label_country, Model model) {
+                                 @RequestParam String label_country, Model model) {
         if (recordLabelService.existsRecordLabelByName(label_name)) {
             model.addAttribute("exists", true);
             return "reject";
@@ -147,8 +152,40 @@ public class MyController {
 
         recordLabelService.addRecordLabel(new RecordLabel(label_name, label_country));
 
-        return "redirect:/newlabel";
+        return "redirect:/recordlabel_list";
+    }
+
+    @RequestMapping(value = "/recordlabel/add", method = RequestMethod.POST)
+    public String groupAdd(@RequestParam String name) {
+        artistService.recordLabelsListForArtist(new RecordLabel(name));
+        return "redirect:/newartist";
     }
 
 
+    @RequestMapping("/recordlabel/{id}")
+    public String listGroup(@PathVariable(value = "id") long groupId, Model model) {
+        RecordLabel recordLabel = (groupId != DEFAULT_RECORDLABEL_ID) ? artistService.findRecordLabel(groupId) : null;
+
+        model.addAttribute("recordlabel", artistService.recordLabelsListForArtist(recordLabel));
+ //     model.addAttribute("contacts", artistService.l(group));
+
+        return "index";
+    }
+
+    @RequestMapping(value = "recordlabel_list", method = RequestMethod.GET)
+    public String recordLabelList(Model model) {
+        model.addAttribute("recordlabel", new RecordLabel());
+        model.addAttribute("recordLabelList", recordLabelService.recordLabelList());
+        return "recordlabel_list";
+    }
+
+    @RequestMapping("label/remove/{id}")
+    public String removeRecordLabel(@PathVariable("id") Long id) {
+
+        recordLabelService.deleteRecordLabel(id);
+
+        return "redirect:/recordlabel_list";
+    }
+
 }
+

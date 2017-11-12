@@ -8,21 +8,39 @@
 </head>
 <body>
 <div align="center">
-    <c:url value="/newartist" var="regUrl" />
+    <h1>Create New Artist</h1>
+    <c:url value="/newartist" var="regUrl"/>
 
     <form action="${regUrl}" method="POST">
         Artist First Name:<br/><input type="text" name="artist_firstname"><br/>
         Artist Second Name:<br/><input type="text" name="artist_secondname"><br/>
         Artist Nickname:<br/><input type="text" name="artist_nickname"><br/>
-        <input type="submit" />
+
+        <div class="menu-down-arrow">
+            <select class="selectpicker form-control form-group" name="recordlabel">
+                <option value="-1">Record Label List</option>
+                <c:forEach items="${recordlabel.id}" var="recordlabel">
+                    <option value="${recordlabel.id}">${recordlabel.label_name}</option>
+                </c:forEach>
+            </select>
+        </div>
+        <input type="submit"/>
 
         <c:if test="${exists ne null}">
             <p>Artist already exists!</p>
         </c:if>
     </form>
-</div>
 
-<a href="artist_list">Artist List</a>
+    <div>
+        <a href="artist_list">Artist List</a>
+    </div>
+    <div>
+        <a href="recordlabel_list">Record Label List</a>
+    </div>
+</div>
+<script>
+    $('.selectpicker').selectpicker();
+</script>
 
 </body>
 </html>

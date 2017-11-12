@@ -10,6 +10,7 @@ import org.springframework.data.repository.query.Param;
  * @author Gagauz Sergey
  * Created by user on 04.11.2017.
  */
+
 public interface RecordLabelRepository extends JpaRepository <RecordLabel, Long>{
 
     @Query("SELECT u FROM RecordLabel u where u.label_name = :label_name")

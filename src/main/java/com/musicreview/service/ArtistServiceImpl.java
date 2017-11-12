@@ -65,4 +65,13 @@ public class ArtistServiceImpl implements ArtistService {
     public List <Artist> artistList() {
         return artistRepository.findAll();
     }
+
+    @Override
+    @Transactional
+    public List <RecordLabel> recordLabelsListForArtist(RecordLabel recordLabel) {return recordLabelRepository.findAll();}
+
+    @Override
+    public RecordLabel findRecordLabel(long id) {
+        return recordLabelRepository.getOne(id);
+    }
 }

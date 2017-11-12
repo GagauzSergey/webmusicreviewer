@@ -8,19 +8,21 @@
 </head>
 <body>
 <div align="center">
-    <h1>Artist List</h1>
+    <h1>Record Label List</h1>
 
-    <c:if test="${!empty artistList}">
+    <c:if test="${!empty recordLabelList}">
         <table class="tg">
             <tr>
                 <th width="80">ID</th>
-                <th width="120">Artist nickname</th>
+                <th width="120">Record Label List</th>
+                <th width="120">Contry</th>
             </tr>
-            <c:forEach items="${artistList}" var="artist">
+            <c:forEach items="${recordLabelList}" var="recordlabel">
                 <tr>
-                    <td><a href="/newartist/${artist.id}" target="_blank">${artist.id}</a></td>
-                    <td>${artist.artist_nickname}</td>
-                    <td><a href="<c:url value='/remove/${artist.id}'/>">Delete</a></td>
+                    <td><a href="/newlabel/${recordlabel.id}" target="_blank">${recordlabel.id}</a></td>
+                    <td>${recordlabel.label_name}</td>
+                    <td>${recordlabel.label_country}</td>
+                    <td><a href="<c:url value='label/remove/${recordlabel.id}'/>">Delete</a></td>
                 </tr>
             </c:forEach>
         </table>
@@ -29,7 +31,7 @@
         <a href="newartist">New Artist</a>
     </div>
     <div>
-        <a href="newlabel">New Label</a>
+        <a href="newlabel">New Record Label</a>
     </div>
 </div>
 <script>

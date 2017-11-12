@@ -17,7 +17,7 @@ import java.util.Set;
  */
 
 @Service
-public class RecordLabelServiceImpl implements RecordLabelService{
+public class RecordLabelServiceImpl implements RecordLabelService {
 
     @Autowired
     private RecordLabelRepository recordLabelRepository;
@@ -27,12 +27,12 @@ public class RecordLabelServiceImpl implements RecordLabelService{
 
     @Override
     public RecordLabel getRecordLabelByName(String label_name) {
-        return null;
+        return recordLabelRepository.findByRecordLabelName(label_name);
     }
 
     @Override
     public boolean existsRecordLabelByName(String label_name) {
-        return false;
+        return recordLabelRepository.existsByRecordLabelName(label_name);
     }
 
     @Override
@@ -45,17 +45,17 @@ public class RecordLabelServiceImpl implements RecordLabelService{
     }
 
     @Override
-    public void updateArtist(RecordLabel recordLabel) {
-
+    public void updateRecordLabel(RecordLabel recordLabel) {
+        recordLabelRepository.save(recordLabel);
     }
 
     @Override
-    public void deleteArtist(Long id) {
-
+    public void deleteRecordLabel(Long id) {
+        recordLabelRepository.delete(id);
     }
 
     @Override
     public List<RecordLabel> recordLabelList() {
-        return null;
+        return recordLabelRepository.findAll();
     }
 }
