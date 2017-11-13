@@ -19,18 +19,18 @@ public class RecordLabel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column (name = "label_name")
+    @Column(name = "label_name")
     private String label_name;
 
-    @Column (name = "label_country")
+    @Column(name = "label_country")
     private String label_country;
 
-    @ManyToMany (fetch = FetchType.LAZY, mappedBy = "recordLabels")
-    private Set <Artist> artistsList;
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "recordLabels")
+    private Set<Artist> artistsList;
 
     public RecordLabel(String label_name, String label_country) {
         this.label_name = label_name;
-        this.label_country=label_country;
+        this.label_country = label_country;
     }
 
     public RecordLabel(String label_name) {

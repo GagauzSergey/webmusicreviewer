@@ -8,16 +8,23 @@ import java.util.List;
 
 /**
  * @author Gagauz Sergey
- * Created by user on 03.11.2017.
+ *         Created by user on 03.11.2017.
  */
 
 public interface ArtistService {
     Artist getArtistByNickname(String nickname);
+
     boolean existsByNickname(String nickname);
+
     void addArtist(Artist artist);
+
     void updateArtist(Artist artist);
-    void deleteArtist (Long id);
-    List <Artist> artistList();
-    List <RecordLabel> recordLabelsListForArtist(RecordLabel recordLabel);
+
+    void deleteArtist(Long id);
+
+    List<Artist> artistList();
+
+    List<RecordLabel> recordLabelsListForArtist(RecordLabel recordLabel);
+
     RecordLabel findRecordLabel(long id);
 }

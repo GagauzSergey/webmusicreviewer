@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 
 public interface RecordLabelRepository extends JpaRepository <RecordLabel, Long>{
 
-    @Query("SELECT u FROM RecordLabel u where u.label_name = :label_name")
+    @Query("SELECT u FROM Recordlabel u where u.label_name = :label_name")
     RecordLabel findByRecordLabelName(@Param("label_name") String label_name);
 
     @Query("SELECT CASE WHEN COUNT(u) > 0 THEN true ELSE false END FROM RecordLabel u WHERE u.label_name = :label_name")
