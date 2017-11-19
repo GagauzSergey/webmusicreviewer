@@ -1,6 +1,6 @@
 package com.musicreview.config;
 
-import com.musicreview.service.UserDetailsServiceImpl;
+import com.musicreview.service.impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

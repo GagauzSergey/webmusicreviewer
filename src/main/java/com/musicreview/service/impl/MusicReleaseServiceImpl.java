@@ -1,9 +1,11 @@
-package com.musicreview.service;
+package com.musicreview.service.impl;
 
 import com.musicreview.dao.MusicReleaseRepository;
 import com.musicreview.dao.RecordLabelRepository;
 import com.musicreview.model.MusicRelease;
 import com.musicreview.model.RecordLabel;
+import com.musicreview.service.MusicReleaseService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,13 +19,18 @@ import java.util.Set;
  *         Created by user on 11.11.2017.
  */
 @Service
+@Slf4j
 public class MusicReleaseServiceImpl implements MusicReleaseService {
 
-    @Autowired
     private MusicReleaseRepository musicReleaseRepository;
 
-    @Autowired
     private RecordLabelRepository recordLabelRepository;
+
+    @Autowired
+    public MusicReleaseServiceImpl(MusicReleaseRepository musicReleaseRepository, RecordLabelRepository recordLabelRepository) {
+        this.musicReleaseRepository = musicReleaseRepository;
+        this.recordLabelRepository = recordLabelRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)

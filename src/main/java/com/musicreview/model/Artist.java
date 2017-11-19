@@ -3,8 +3,9 @@ package com.musicreview.model;
 
 import org.springframework.stereotype.Repository;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Set;
 
 
@@ -15,6 +16,8 @@ import java.util.Set;
 
 @Entity
 @Repository
+@Data
+@NoArgsConstructor (force = true)
 public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,87 +33,20 @@ public class Artist {
     private String artist_nickname;
 
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "artist_recordlabel", joinColumns = @JoinColumn(name = "artist_id"),
             inverseJoinColumns = @JoinColumn(name = "label_id"))
     private Set<RecordLabel> recordLabels;
 
-    @ManyToMany (fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany (fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable (name = "artist_musicrelease", joinColumns = @JoinColumn (name = "artist_id"),
     inverseJoinColumns = @JoinColumn (name = "musicrelease_id"))
     private Set <MusicRelease> musicReleaseSet;
-
 
     public Artist(String artist_firstname, String artist_secondname, String artist_nickname) {
         this.artist_firstname = artist_firstname;
         this.artist_secondname = artist_secondname;
         this.artist_nickname = artist_nickname;
-    }
-
-    public Artist(String artist_nickname) {
-        this.artist_nickname = artist_nickname;
-    }
-
-    public Artist() {
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getArtist_firstname() {
-        return artist_firstname;
-    }
-
-    public void setArtist_firstname(String artist_firstname) {
-        this.artist_firstname = artist_firstname;
-    }
-
-    public String getArtist_secondname() {
-        return artist_secondname;
-    }
-
-    public void setArtist_secondname(String artist_secondname) {
-        this.artist_secondname = artist_secondname;
-    }
-
-    public String getArtist_nickname() {
-        return artist_nickname;
-    }
-
-    public void setArtist_nickname(String artist_nickname) {
-        this.artist_nickname = artist_nickname;
-    }
-
-    public Set<RecordLabel> getRecordLabels() {
-        return recordLabels;
-    }
-
-    public void setRecordLabels(Set<RecordLabel> recordLabels) {
-        this.recordLabels = recordLabels;
-    }
-
-    public Set<MusicRelease> getMusicReleaseSet() {
-        return musicReleaseSet;
-    }
-
-    public void setMusicReleaseSet(Set<MusicRelease> musicReleaseSet) {
-        this.musicReleaseSet = musicReleaseSet;
-    }
-
-    @Override
-    public String toString() {
-        return "Artist{" +
-                "id=" + id +
-                ", artist_firstname='" + artist_firstname + '\'' +
-                ", artist_secondname='" + artist_secondname + '\'' +
-                ", artist_nickname='" + artist_nickname + '\'' +
-                ", recordLabels=" + recordLabels +
-                '}';
     }
 }
 

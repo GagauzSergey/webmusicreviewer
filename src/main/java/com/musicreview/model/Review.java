@@ -1,5 +1,7 @@
 package com.musicreview.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Date;
 
 @Entity
 @Repository
+@Data
+@NoArgsConstructor (force = true)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -41,54 +45,4 @@ public class Review {
         this.musicRelease = musicRelease;
     }
 
-    public Review() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getReview_name() {
-        return review_name;
-    }
-
-    public void setReview_name(String review_name) {
-        this.review_name = review_name;
-    }
-
-    public String getReview_text() {
-        return review_text;
-    }
-
-    public void setReview_text(String review_text) {
-        this.review_text = review_text;
-    }
-
-    public int getReview_rate() {
-        return review_rate;
-    }
-
-    public void setReview_rate(int review_rate) {
-        this.review_rate = review_rate;
-    }
-
-    public Date getReview_time() {
-        return review_time;
-    }
-
-    public void setReview_time(Date review_time) {
-        this.review_time = review_time;
-    }
-
-    public MusicRelease getMusicRelease() {
-        return musicRelease;
-    }
-
-    public void setMusicRelease(MusicRelease musicRelease) {
-        this.musicRelease = musicRelease;
-    }
 }

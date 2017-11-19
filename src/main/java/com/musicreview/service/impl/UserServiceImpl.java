@@ -1,4 +1,4 @@
-package com.musicreview.service;
+package com.musicreview.service.impl;
 
 import com.musicreview.dao.UserRepository;
 import com.musicreview.model.CustomUser;
@@ -9,8 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+    private final UserRepository userRepository;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)

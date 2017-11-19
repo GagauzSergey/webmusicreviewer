@@ -1,9 +1,11 @@
-package com.musicreview.service;
+package com.musicreview.service.impl;
 
 import com.musicreview.dao.ArtistRepository;
 import com.musicreview.dao.RecordLabelRepository;
 import com.musicreview.model.Artist;
 import com.musicreview.model.RecordLabel;
+import com.musicreview.service.ArtistService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,13 +20,18 @@ import java.util.Set;
  */
 
 @Service
+@Slf4j
 public class ArtistServiceImpl implements ArtistService {
 
-    @Autowired
-    private ArtistRepository artistRepository;
+    private final ArtistRepository artistRepository;
+
+    private final RecordLabelRepository recordLabelRepository;
 
     @Autowired
-    private RecordLabelRepository recordLabelRepository;
+    public ArtistServiceImpl(ArtistRepository artistRepository, RecordLabelRepository recordLabelRepository) {
+        this.artistRepository = artistRepository;
+        this.recordLabelRepository = recordLabelRepository;
+    }
 
     @Override
     @Transactional(readOnly = true)
@@ -56,7 +63,7 @@ public class ArtistServiceImpl implements ArtistService {
     @Override
     @Transactional
     public void deleteArtist(Long id) {
- //       artistRepository.delete(getArtistByNickname(nickname));
+ //     artistRepository.delete(getArtistByNickname(nickname));
         artistRepository.delete(id);
     }
 

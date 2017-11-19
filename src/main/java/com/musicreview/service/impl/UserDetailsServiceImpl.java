@@ -1,6 +1,8 @@
-package com.musicreview.service;
+package com.musicreview.service.impl;
 
 import com.musicreview.model.CustomUser;
+import com.musicreview.service.UserService;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,10 +19,15 @@ import java.util.Set;
 /*
 * UserDetailsService
 * */
+@NoArgsConstructor (force = true)
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private final UserService userService;
+
     @Autowired
-    private UserService userService;
+    public UserDetailsServiceImpl(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {

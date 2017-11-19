@@ -22,19 +22,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class MyController {
 
-    static final int DEFAULT_RECORDLABEL_ID = -1;
+    private static final int DEFAULT_RECORDLABEL_ID = -1;
+
+
+    private final UserService userService;
+
+
+    private final ArtistService artistService;
+
+
+    private final RecordLabelService recordLabelService;
 
     @Autowired
-    private UserService userService;
-
-    @Autowired
-    private ArtistService artistService;
-
-    @Autowired
-    private RecordLabelService recordLabelService;
-
-    @Autowired
-    private MusicReleaseService musicReleaseService;
+    public MyController(UserService userService, ArtistService artistService, RecordLabelService recordLabelService, MusicReleaseService musicReleaseService) {
+        this.userService = userService;
+        this.artistService = artistService;
+        this.recordLabelService = recordLabelService;
+    }
 
     @RequestMapping("/")
     public String index(Model model) {
@@ -43,7 +47,7 @@ public class MyController {
 
         CustomUser dbUser = userService.getUserByLogin(login);
         model.addAttribute("firstName", dbUser.getFirstName());
-        model.addAttribute("secondName", dbUser.getSecondName());
+        model.addAttribute("secondName", dbUser.getLastName());
         model.addAttribute("login", login);
         model.addAttribute("roles", user.getAuthorities());
         model.addAttribute("email", dbUser.getEmail());
@@ -60,6 +64,7 @@ public class MyController {
         dbUser.setEmail(email);
 
         userService.updateUser(dbUser);
+
 
         return "redirect:/";
     }
@@ -167,14 +172,14 @@ public class MyController {
         RecordLabel recordLabel = (groupId != DEFAULT_RECORDLABEL_ID) ? artistService.findRecordLabel(groupId) : null;
 
         model.addAttribute("recordlabel", artistService.recordLabelsListForArtist(recordLabel));
- //     model.addAttribute("contacts", artistService.l(group));
+        //     model.addAttribute("contacts", artistService.l(group));
 
         return "index";
     }
 
     @RequestMapping(value = "recordlabel_list", method = RequestMethod.GET)
     public String recordLabelList(Model model) {
-        model.addAttribute("recordlabel", new RecordLabel());
+    model.addAttribute("recordlabel", new RecordLabel());
         model.addAttribute("recordLabelList", recordLabelService.recordLabelList());
         return "recordlabel_list";
     }

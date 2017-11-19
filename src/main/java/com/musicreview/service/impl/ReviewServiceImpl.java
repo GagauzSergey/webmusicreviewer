@@ -1,9 +1,10 @@
-package com.musicreview.service;
+package com.musicreview.service.impl;
 
 import com.musicreview.dao.MusicReleaseRepository;
 import com.musicreview.dao.ReviewRepository;
 import com.musicreview.model.MusicRelease;
 import com.musicreview.model.Review;
+import com.musicreview.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
