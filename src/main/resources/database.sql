@@ -1,12 +1,12 @@
 -- Table: User
 CREATE TABLE customuser (
   id             INT          NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  user_firstname VARCHAR(255) NOT NULL,
-  user_lastname  VARCHAR(255) NOT NULL,
-  user_login VARCHAR (255) NOT NULL ,
-  user_password  VARCHAR(255) NOT NULL,
-  user_email     VARCHAR(255) NOT NULL,
-  user_role VARCHAR(255)
+  firstname VARCHAR(255) NOT NULL,
+  lastname  VARCHAR(255) NOT NULL,
+  login VARCHAR (255) NOT NULL ,
+  password  VARCHAR(255) NOT NULL,
+  email     VARCHAR(255) NOT NULL,
+  role VARCHAR(255)
 )
   ENGINE = InnoDB;
 
