@@ -15,11 +15,11 @@ import java.util.Date;
 @Entity
 @Repository
 @Data
-@NoArgsConstructor (force = true)
+@NoArgsConstructor(force = true)
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column(name = "review_name")
     private String review_name;
@@ -37,12 +37,17 @@ public class Review {
     @JoinColumn(name = "musicrelease_id")
     private MusicRelease musicRelease;
 
-    public Review(String review_name, String review_text, int review_rate, Date review_time, MusicRelease musicRelease) {
+    public Review(String review_name, String review_text, int review_rate, MusicRelease musicRelease) {
         this.review_name = review_name;
         this.review_text = review_text;
         this.review_rate = review_rate;
         this.review_time = review_time;
         this.musicRelease = musicRelease;
+    }
+    public Review(String review_name, String review_text, int review_rate) {
+        this.review_name = review_name;
+        this.review_text = review_text;
+        this.review_rate = review_rate;
     }
 
 }

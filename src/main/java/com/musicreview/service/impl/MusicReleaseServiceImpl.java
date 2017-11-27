@@ -64,6 +64,11 @@ public class MusicReleaseServiceImpl implements MusicReleaseService {
     }
 
     @Override
+    public MusicRelease getMusicReleaseById(long id) {
+       return musicReleaseRepository.findOne(id);
+    }
+
+    @Override
     public List<MusicRelease> musicReleaseList() {
         return musicReleaseRepository.findAll();
     }

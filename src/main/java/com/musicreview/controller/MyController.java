@@ -1,13 +1,8 @@
 package com.musicreview.controller;
 
-import com.musicreview.model.Artist;
-import com.musicreview.model.RecordLabel;
-import com.musicreview.model.UserRole;
-import com.musicreview.service.ArtistService;
-import com.musicreview.service.MusicReleaseService;
-import com.musicreview.service.RecordLabelService;
-import com.musicreview.service.UserService;
-import com.musicreview.model.CustomUser;
+import com.musicreview.model.*;
+import com.musicreview.service.*;
+import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.encoding.ShaPasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.Date;
 
 @Controller
 public class MyController {
@@ -33,11 +30,21 @@ public class MyController {
 
     private final RecordLabelService recordLabelService;
 
+
+    private final MusicReleaseService musicReleaseService;
+
+
+    private final ReviewService reviewService;
+
     @Autowired
-    public MyController(UserService userService, ArtistService artistService, RecordLabelService recordLabelService, MusicReleaseService musicReleaseService) {
+    public MyController(UserService userService, ArtistService artistService,
+                        RecordLabelService recordLabelService,
+                        MusicReleaseService musicReleaseService, ReviewService reviewService) {
         this.userService = userService;
         this.artistService = artistService;
         this.recordLabelService = recordLabelService;
+        this.musicReleaseService = musicReleaseService;
+        this.reviewService = reviewService;
     }
 
     @RequestMapping("/")
@@ -179,7 +186,7 @@ public class MyController {
 
     @RequestMapping(value = "recordlabel_list", method = RequestMethod.GET)
     public String recordLabelList(Model model) {
-    model.addAttribute("recordlabel", new RecordLabel());
+        model.addAttribute("recordlabel", new RecordLabel());
         model.addAttribute("recordLabelList", recordLabelService.recordLabelList());
         return "recordlabel_list";
     }
@@ -192,5 +199,39 @@ public class MyController {
         return "redirect:/recordlabel_list";
     }
 
-}
+    @RequestMapping("/newreview")
+    public String review() {
+        return "newreview";
+    }
 
+    @RequestMapping(value = "/newreview", method = RequestMethod.POST)
+    public String addReview(@RequestParam String review_name,
+                            @RequestParam String review_rate,
+                            @RequestParam String review_text,
+//                            @RequestParam Long musicrelease_id,
+                            Model model) {
+
+        model.addAttribute(new Review());
+
+        reviewService.addReview(new Review(review_name, review_text, Integer.parseInt(review_rate)
+ //               ,                                reviewService.findMusicRelease(musicrelease_id)
+        ));
+
+        return "redirect:/review_list";
+    }
+
+    @RequestMapping(value = "review_list", method = RequestMethod.GET)
+    public String reviewList(Model model) {
+        model.addAttribute("review", new Review());
+        model.addAttribute("reviewList", reviewService.reviewList());
+        return "review_list";
+    }
+
+    @RequestMapping("review/remove/{id}")
+    public String removeReview(@PathVariable("id") Long id) {
+
+        reviewService.deleteReview(id);
+
+        return "redirect:/review_list";
+    }
+}

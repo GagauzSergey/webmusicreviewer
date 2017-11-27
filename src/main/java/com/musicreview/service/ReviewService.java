@@ -26,6 +26,6 @@ public interface ReviewService {
 
     List<MusicRelease> musicReleaseLinkedToReview(MusicRelease musicRelease);
 
-    MusicRelease findMusicRelease(long id);
+    MusicRelease findMusicRelease(Long id);
 }
 

@@ -17,11 +17,15 @@ import java.util.List;
 @Service
 public class ReviewServiceImpl implements ReviewService {
 
-    @Autowired
-    ReviewRepository reviewRepository;
+    private final ReviewRepository reviewRepository;
+
+    private final MusicReleaseRepository musicReleaseRepository;
 
     @Autowired
-    MusicReleaseRepository musicReleaseRepository;
+    public ReviewServiceImpl(ReviewRepository reviewRepository, MusicReleaseRepository musicReleaseRepository) {
+        this.reviewRepository = reviewRepository;
+        this.musicReleaseRepository = musicReleaseRepository;
+    }
 
     @Override
     public Review getReviewByName(String review_name) {
@@ -59,7 +63,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public MusicRelease findMusicRelease(long id) {
-        return musicReleaseRepository.findOne(1L);
+    public MusicRelease findMusicRelease(Long id) {
+        return musicReleaseRepository.findOne(id);
     }
 }

@@ -19,6 +19,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor (force = true)
 public class Artist {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;

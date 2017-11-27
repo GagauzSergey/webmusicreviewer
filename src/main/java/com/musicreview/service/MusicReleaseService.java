@@ -15,5 +15,6 @@ public interface MusicReleaseService {
     void addMusicRelease(MusicRelease musicRelease);
     void updateMusicRelease(MusicRelease musicRelease);
     void deleteMusicRelease (Long id);
+    MusicRelease getMusicReleaseById (long id);
     List<MusicRelease> musicReleaseList();
 }

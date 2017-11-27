@@ -20,7 +20,7 @@ import java.util.Set;
 public class MusicRelease {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     @Column(name = "release_title")
     private String release_title;
